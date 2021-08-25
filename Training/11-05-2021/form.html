@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lan="en-us">
+<head>
+	<meta charset="charset">
+	<title>Form</title>
+	<link rel= "stylesheet" type="text/css" href= "form.css">
+
+<!..Internal Styling.. >
+
+<style>
+  input{
+	border: 2px solid white;
+	margin:5px;
+        padding: 12px 10px;
+	width:100%;
+        }
+  select{
+      	margin:10px;
+        }
+  #male{
+ 	width:20%  
+       }
+  #female{
+	width:20%
+        }
+  #registerbtn{
+	width:100px;
+ 	margin:10px auto;
+	margin-left:50px;
+	position:relative;
+	padding:12px 10px;
+        border:2px solid;
+	border-radius:10px;
+       }
+ #resetbtn{
+	width:100px;
+ 	margin:10px auto;
+	margin-left:50px;
+	position:relative;
+	padding:12px 10px;
+        border:2px solid;
+	border-radius:10px;
+	}
+ #checkbox{
+	width:20%
+	}
+	
+</style>
+</head>
+
+<body>
+	<div id="div1">
+	  <form id ="formbox" name="myForm" onsubmit="return ValidateForm()"> 
+
+		<!...Inline Styling...>
+		<h1 style="font:times new roman; text-align:center">Register Here!</h1>
+		
+		<input type="text" id ="fname" name= "fname"  placeholder="FirstName">
+		<span id="fname_error" style="color:white"></span><br>
+		<input type="text" id = "lname" name="lname" placeholder="LastName"><br>
+		<input type="text" id = "emailid" name="emailid" placeholder="Email id"><br>
+		<input type="tel" id= "phone" name= "phone" placeholder="phone number"><br>
+		<label for="dob">Date of birth</label>
+		<input type="date" id="dob" name="dob"><br>
+		<input type="radio" id="male" name="gender">
+		<label>Male</label>
+		<input type="radio" id="female" name="gender">
+		<label>Female</label>
+		<input type="textarea" id="address" name="address" placeholder="Address"><br>
+		<label></label>
+		<select id="country" name="country">
+		   <option value="">Select Country</option>
+		   <option value="india">India</option>
+		   <option value="usa">USA</option>
+		   <option value="canada">Canada</option>
+		</select>
+		<input type="password" id="password" name="password" placeholder="Password"><br>
+		<input type= "submit" id="registerbtn" name="register" value="Register">
+		<input type="reset" id="resetbtn" name="resetbtn" value="Reset"><br>
+		<input type="checkbox" id="checkbox"><span>I agree to the terms and conditions</span><br>
+		
+          </form>
+	</div>
+<script>
+function ValidateForm() {
+ ValidateText();}
+function ValidateText(){
+   var fname= document.getElementById("fname").value;
+   if(fname==""){
+	document.getElementById('fname_error').innerHTML= "First Name is empty";
+	return false;
+	 }
+  else{
+	document.getElementById('fname_error').innerHTML = "";
+	}
+  
+}
+
+
+
+
+</script>
+</body>;
+
+</html>

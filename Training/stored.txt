@@ -1,0 +1,8 @@
+create Procedure spu_users(
+@Id int,
+@IsActive bit,
+@IsDeleted bit)
+AS 
+Begin
+ update users set IsActive=@IsActive, IsDeleted=@IsDeleted,ModifiedDate=GETDATE(),ModifiedBy=SYSTEM_USER where id=@Id;
+End

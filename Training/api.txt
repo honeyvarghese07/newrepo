@@ -1,0 +1,58 @@
+[HttpGet]
+        [Route("api/User/{id}")]
+        public user Get(int id)
+        {
+            DataAccessClass dataAccess = new DataAccessClass();
+            user result = dataAccess.GetUser(id);
+            return result;
+        }
+
+
+        [HttpPost]
+        [Route("api/User")]
+        public string Post(user NewUser)
+        {
+
+            DataAccessClass CreateNewUser = new DataAccessClass();
+            return CreateNewUser.CreateUser(NewUser);
+
+            
+        }
+        [HttpPost]
+        [Route("api/User/PostUser")]
+        public string PostUser(user SelectUser)
+        {
+            DataAccessClass User = new DataAccessClass();
+            return User.PostUser(SelectUser);
+        }
+
+
+[HttpPost]
+        [Route("api/User/App")]
+        public string postContent([FromBody]string Content)
+        {
+            return Content;
+        }
+
+
+
+
+
+ $.ajax({
+                url: "api/User/Authenticate",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    "UserName": $("#email").val(),
+                    "Password": $("#password").val()
+                },
+                success: function (data) {
+                    alert("Success");
+                },
+                error: function (data) {
+
+
+
+
+
+https://channels.autopilot.twilio.com/v1/AC538939bf55388eab3a166cdc6670f3a3/UAa1b58f6303ddaf2be27e91843e9224c6/twilio-messaging

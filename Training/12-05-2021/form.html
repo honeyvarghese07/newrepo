@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lan="en-us">
+<head>
+	<meta charset="charset">
+	<title>Form</title>
+	<link rel= "stylesheet" type="text/css" href= "form.css">
+
+<!..Internal Styling.. >
+
+<style>
+  input{
+	border: 2px solid white;
+	border-radius:5px;
+	margin:5px;
+        padding: 12px 10px;
+	width:100%;
+        }
+  select{
+      	margin:5px;
+	height:50px;
+        width:360px;
+        border-radius:5px;
+        }
+  #male{
+ 	width:20%  
+       }
+  #female{
+	width:20%
+        }
+  #registerbtn{
+	width:100px;
+ 	margin:10px auto;
+	margin-left:50px;
+	position:relative;
+	padding:12px 10px;
+        border:2px solid;
+	border-radius:10px;
+       }
+ #resetbtn{
+	width:100px;
+ 	margin:10px auto;
+	margin-left:50px;
+	position:relative;
+	padding:12px 10px;
+        border:2px solid;
+	border-radius:10px;
+	}
+ #checkbox{
+	width:20%
+	}
+ #address{
+	height:70px;
+	}
+	
+</style>
+</head>
+
+<body>
+	<div id="div1">
+	  <form id ="formbox" name="myForm" onsubmit="return ValidateForm()"> 
+
+		<!...Inline Styling...>
+		<h1 style="font:times new roman; text-align:center">Register Here!</h1>
+		
+		<input type="text" id ="fname" name= "fname"  placeholder="FirstName">
+		<input type="text" id = "lname" name="lname" placeholder="LastName">
+		<input type="text" id = "emailid" name="emailid" placeholder="Email id"><br>
+		<input type="tel" id= "phone" name= "phone" placeholder="phone number"><br>
+		<label for="dob">Date of birth</label>
+		<input type="date" id="dob" name="dob">
+		<input type="radio" id="male" name="gender">
+		<label>Male</label>
+		<input type="radio" id="female" name="gender">
+		<label>Female</label>
+		<input type="textarea" id="address" name="address" placeholder="Address"><br>
+		<select id="country" name="country">
+		   <option value="">Select Country</option>
+		   <option value="india">India</option>
+		   <option value="usa">USA</option>
+		   <option value="canada">Canada</option>
+		</select>
+		<input type="password" id="password" name="password" placeholder="Password">
+		<input type= "submit" id="registerbtn" name="register" value="Register">
+		<input type="reset" id="resetbtn" name="resetbtn" value="Reset"><br>
+		<input type="checkbox" id="checkbox"><span style="color:white">I agree to the terms and conditions</span><br>
+		
+          </form>
+	</div>
+
+ <script src="form.js">
+
+ </script>
+
+</body>
+</html>

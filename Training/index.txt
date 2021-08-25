@@ -1,0 +1,105 @@
+
+@{ 
+    ViewBag.Title = "Index";
+    var accesstoken = ViewBag.calltoken;
+
+}
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="//media.twiliocdn.com/sdk/js/client/v1.3/twilio.min.js">
+    </script>
+
+
+
+    <script type="text/javascript">
+        var callStatus = $("#call-status");
+        var answerButton = $(".answer-button");
+        var hangUpButton = $(".hangup-button");
+        var ready = $('.ready-button')
+        var device = null;
+
+        
+
+        /* Helper function to update the call status bar */
+        function updateCallStatus(status) {
+            callStatus.text(status);
+        }
+
+
+        function DeviceSetup(calltoken) {
+            const device = new Twilio.Device()
+            device.setup(calltoken)
+            alert(" You Clicked ReadyButton")
+            device.on('ready', function (_device) {
+                updateCallStatus("Ready");
+            });
+
+            device.on('error', function (error) {
+                updateCallStatus("ERROR: " + error.message);
+            });
+            device.on('connect', function (connection) {
+                hangUpButton.prop("disabled", false);
+                answerButton.prop("disabled", true);
+
+                if ("phoneNumber" in connection.message) {
+                    updateCallStatus("In call with " + connection.message.phoneNumber);
+                } else {
+                    // This is a call from a website user to a support agent
+                    updateCallStatus("In call with support");
+                }
+            });
+
+            /* Callback for when a call ends */
+            device.on('disconnect', function (connection) {
+                // Disable the hangup button and enable the call buttons
+                hangUpButton.prop("disabled", true);
+                updateCallStatus("Ready");
+            });
+
+            /* Callback for when Twilio Client receives a new incoming call */
+            device.on('incoming', function (connection) {
+                updateCallStatus("Incoming support call");
+
+                // Set a callback to be executed when the connection is accepted
+                connection.accept(function () {
+                    updateCallStatus("In call with customer");
+                });
+
+                // Set a callback on the answer button and enable it
+                answerButton.click(function () {
+                    connection.accept();
+                });
+                answerButton.prop("disabled", false);
+            });
+        };
+
+        /* End a call */
+        function hangUp() {
+            device.disconnectAll();
+        }
+
+        
+    </script>
+    
+</head>
+        <div class="col-md-4 col-md-push-8">
+            <div class="card card-primary client-controls">
+                <div class="card-heading">
+                </div>
+                <div class="card-body">
+                    <p>
+                        <strong>Status: </strong>
+                        <span id="call-status">
+                            Connecting to Twilio...
+                        </span>
+                    </p>
+                    <button class="btn btn-lg btn-success ready-button" onclick="DeviceSetup('@accesstoken')">Ready</button>
+                    <button class="btn btn-lg btn-success answer-button" disabled>Answer call</button>
+                    <button class="btn btn-lg btn-danger hangup-button" disabled onclick="hangUp()">Hang up</button>
+                </div>
+            </div>
+        </div>
+
+

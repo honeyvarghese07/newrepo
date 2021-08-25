@@ -1,0 +1,26 @@
+try
+                {
+                    DataAccess insert = new DataAccess();
+                    DateTime Dob = DateTime.Parse(dob.Text);
+                    string Password = Encrypt.EncryptPassword(password.Text);
+                    insert.CreateUser(fname.Text, lname.Text, emailid.Text, phone.Text, gender.SelectedValue, Dob, address.Text, country.SelectedValue, Password);
+                    
+                    HttpContext.Current.Response.Write("<script> alert('Registration Successfull!');</script>");
+                    Server.Transfer("LoginPage.aspx",false);
+                    
+                }
+                catch (ThreadAbortException)
+                {
+                }
+                catch (Exception ex)
+                {
+                    ExceptionLogging.ExceptionLogg.SendExcepToDB(ex);
+                    ExceptionToText.ExceptionToText.SendErrorToText(ex);
+                    HttpContext.Current.Response.Write("<script> alert('Something went wrong!');</script>");
+                }
+            }
+            else
+            {
+                Response.Write("<script> alert('Registration Unsuccessfull!');</script>");
+            }
+            
